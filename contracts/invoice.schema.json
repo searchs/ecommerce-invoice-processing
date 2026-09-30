@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/contracts/invoice.schema.json",
+  "title": "Invoice",
+  "type": "object",
+  "required": [
+    "InvoiceNumber",
+    "CreatedTime",
+    "StoreID",
+    "PosID",
+    "CashierID",
+    "CustomerType",
+    "TotalAmount",
+    "NumberOfItems",
+    "PaymentMethod",
+    "DeliveryType",
+    "InvoiceLineItems"
+  ],
+  "properties": {
+    "InvoiceNumber": {"type": "string"},
+    "CreatedTime": {"type": "integer"},
+    "StoreID": {"type": "string"},
+    "PosID": {"type": "string"},
+    "CashierID": {"type": "string"},
+    "CustomerType": {"type": "string"},
+    "CustomerCardNo": {"type": ["string", "null"]},
+    "TotalAmount": {"type": "number"},
+    "NumberOfItems": {"type": "integer", "minimum": 0},
+    "PaymentMethod": {"type": "string"},
+    "CGST": {"type": "number"},
+    "SGST": {"type": "number"},
+    "CESS": {"type": "number"},
+    "DeliveryType": {"type": "string"},
+    "DeliveryAddress": {
+      "type": ["object", "null"],
+      "properties": {
+        "AddressLine": {"type": "string"},
+        "City": {"type": "string"},
+        "State": {"type": "string"},
+        "PinCode": {"type": "string"},
+        "ContactNumber": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "InvoiceLineItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ItemCode", "ItemDescription", "ItemPrice", "ItemQty", "TotalValue"],
+        "properties": {
+          "ItemCode": {"type": "string"},
+          "ItemDescription": {"type": "string"},
+          "ItemPrice": {"type": "number"},
+          "ItemQty": {"type": "integer", "minimum": 0},
+          "TotalValue": {"type": "number"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
